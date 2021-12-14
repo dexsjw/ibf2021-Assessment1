@@ -1,0 +1,18 @@
+{
+    "configurations": [
+
+        {
+            "type": "java",
+            "name": "Launch Main",
+            "request": "launch",
+            "mainClass": "ibf2021.Main",
+            "projectName": "assessment1"
+        },
+        {
+            "type": "java",
+            "name": "Launch Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+    ]
+}
