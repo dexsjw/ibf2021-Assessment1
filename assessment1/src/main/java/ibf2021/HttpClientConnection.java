@@ -11,17 +11,9 @@ import java.net.Socket;
 
 public class HttpClientConnection implements Runnable {
 
-    @Override
-    public void run() {
-        // TODO Auto-generated method stub
-        
-    }
-    
-
-    
-/*     private final Socket socket;
+    private final Socket socket;
     private int id;
-    private String cookieFilePath;
+    private Path ;
 
     public CookieClientHandler(Socket socket, int id, String cookieFilePath) {
         this.socket = socket;
@@ -79,6 +71,6 @@ public class HttpClientConnection implements Runnable {
             }
         }
 
-    } */
+    }
 
 }
