@@ -56,6 +56,7 @@ public class HttpClientConnection implements Runnable {
                 out.writeString(Response1);
                 out.writeString();
                 out.writeString(Response2);
+                scan.close();
                 out.close();
                 socket.close();
 
@@ -77,17 +78,36 @@ public class HttpClientConnection implements Runnable {
                         out.close();
                         socket.close();
                     
-            //Action 3        
+            //Action 4        
                     } else {
+                        if (resource.contains(".png")) {
+                            byte[] buffer = Files.readAllBytes(resourcePath);
+                            String Response1 = "HTTP/1.1 200 OK";
+                            String Response2 = "Content-Type: image/png";
+                            out.writeString(Response1);
+                            out.writeString(Response2);
+                            out.writeString();
+                            out.writeBytes(buffer);
+                            out.close();
+                            socket.close();
+
+            //Action 3
+                        } else {
+                            byte[] buffer = Files.readAllBytes(resourcePath);
+                            String Response1 = "HTTP/1.1 200 OK";
+                            out.writeString(Response1);
+                            out.writeString();
+                            out.writeBytes(buffer);
+                            out.close();
+                            socket.close();
+
+                        }
 
                     }
                 }
 
             }
 
-
-
-            //Action 4
 
 
         } catch (IOException ioe) {
