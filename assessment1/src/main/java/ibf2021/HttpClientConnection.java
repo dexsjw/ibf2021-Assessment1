@@ -8,45 +8,60 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
+import java.nio.file.Path;
+import java.util.List;
 
 public class HttpClientConnection implements Runnable {
 
     private final Socket socket;
-    private int id;
-    private Path ;
+    //private int id;
+    private List<Path> directory;
 
-    public CookieClientHandler(Socket socket, int id, String cookieFilePath) {
+    public HttpClientConnection(Socket socket, List<Path> directoryPathList) {
         this.socket = socket;
-        this.id = id;
-        this.cookieFilePath = cookieFilePath;
+        //this.id = id;
+        this.directory = directoryPathList;
     }
 
     @Override
     public void run() {
         
         BufferedReader in = null;
-        BufferedWriter out = null;
+        HttpWriter out = null;
         String clientLine = "";
-        System.out.println("Connection ID: " + id);
+        //System.out.println("Connection ID: " + id);
 
         try {
 
             BufferedInputStream bis = new BufferedInputStream(socket.getInputStream());
             in = new BufferedReader(new InputStreamReader(bis));
-            BufferedOutputStream bos = new BufferedOutputStream(socket.getOutputStream());
-            out = new BufferedWriter(new OutputStreamWriter(bos));
-
+            out = new HttpWriter(socket.getOutputStream());
+/* 
             out.write("Assigned Client ID: " + id);
             out.newLine();
             out.flush();
-
+ */
             clientLine = in.readLine();
+
+            //Action 1
+            if (!clientLine.contains("GET")) {
+                
+            }
+
+            //Action 2
+
+
+            //Action 3
+
+
+            //Action 4
+
 
         } catch (IOException ioe) {
             System.out.println(ioe);
         }
         
-        while (!clientLine.equals("close") && clientLine != null) {
+/*         while (!clientLine.equals("close") && clientLine != null) {
 
             System.out.println("Client " + id + ": " + clientLine);
 
@@ -69,7 +84,7 @@ public class HttpClientConnection implements Runnable {
                 e.printStackTrace();
                 break;
             }
-        }
+        } */
 
     }
 

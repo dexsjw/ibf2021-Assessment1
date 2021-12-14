@@ -28,35 +28,44 @@ public class HttpServer {
     public void startServer() {
        
         checkPath();
+        List<Path> directoryPathList = new ArrayList<>();
+        directoryPathList = getPath();
+
         try {
             ExecutorService threadpool = Executors.newFixedThreadPool(3);
             ServerSocket server = new ServerSocket(port);
-            System.out.println("--- Server listening at port 3000 ---");
+            System.out.printf("--- Server listening at port %d ---%n", port);
     
-    /*             while (true) { 
+                while (true) { 
     
-                Socket socket = server.accept();
-                int id = (int) (Math.random() * 10000);
-                HttpClientConnection worker = new HttpClientConnection(socket, id, cookieFilePath);
-                threadpool.submit(worker);
+                    Socket socket = server.accept();
+                    //int id = (int) (Math.random() * 10000);
+                    HttpClientConnection worker = new HttpClientConnection(socket, directoryPathList);
+                    threadpool.submit(worker);
     
-            } */
+            }
     
         } catch (IOException ioe) {
             System.out.println(ioe);
-        
-        } finally {
-            //server.close();
+            System.exit(1);
         }
     }
 
-    public void checkPath() {
-        
+    public List<Path> getPath() {
+
         List<Path> directoryPathList = new ArrayList<>();
         for (String dir: directories) {
             Path dirPath = Paths.get(dir);
             directoryPathList.add(dirPath);
         }
+        return directoryPathList;
+
+    }
+
+    public void checkPath() {
+        
+        List<Path> directoryPathList = new ArrayList<>();
+        directoryPathList = getPath();
 
         for (Path dpl: directoryPathList) {
             
@@ -65,18 +74,21 @@ public class HttpServer {
             } else {
                 if (!Files.exists(dpl)) {
                     System.out.println("Path does not exist.");
+                    System.exit(1);
                 } else if (!Files.isDirectory(dpl)) {
                     System.out.println("Path provided is not a directory.");
+                    System.exit(1);
                 } else if (!Files.isReadable(dpl)) {
                     System.out.println("Path is not readable by server.");
+                    System.exit(1);
                 } else {
                     System.out.println("Invalid docRoot Directories provided.");
+                    System.exit(1);
                 }
             }
 
         }
         
     }
-    
     
 }

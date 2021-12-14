@@ -11,7 +11,7 @@ public class Main {
         List<String> directories = new ArrayList<>();
         
         if (args != null && args.length >= 1) {
-           if (args.length >= 4) {
+           if (args.length == 4) {
                if (args[0].contains("--port") && args[2].contains("--docRoot")) {                      //port and directories settings
                    port = Integer.parseInt(args[1]);
                    String directory = args[3];
