@@ -1,6 +1,5 @@
 package ibf2021;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -9,7 +8,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -18,12 +16,12 @@ public class HttpServer {
 
     private int port;
     private List<String> directories;
-    private String directory;
 
     public HttpServer(int port, List<String> directories) {
         this.port = port;
         this.directories = directories;
     }
+
 
     public void startServer() {
        
@@ -40,7 +38,7 @@ public class HttpServer {
     
                     Socket socket = server.accept();
                     //int id = (int) (Math.random() * 10000);
-                    HttpClientConnection worker = new HttpClientConnection(socket, directoryPathList);
+                    HttpClientConnection worker = new HttpClientConnection(socket, directories);
                     threadpool.submit(worker);
     
             }
@@ -50,6 +48,7 @@ public class HttpServer {
             System.exit(1);
         }
     }
+
 
     public List<Path> getPath() {
 
@@ -61,6 +60,7 @@ public class HttpServer {
         return directoryPathList;
 
     }
+
 
     public void checkPath() {
         
