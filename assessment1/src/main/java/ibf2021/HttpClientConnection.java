@@ -108,39 +108,11 @@ public class HttpClientConnection implements Runnable {
 
             }
 
-
-
         } catch (IOException ioe) {
             System.out.println(ioe);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
-/*         while (!clientLine.equals("close") && clientLine != null) {
-
-            System.out.println("Client " + id + ": " + clientLine);
-
-            try {
-                
-                if (clientLine.equals("get-cookie")) {
-                    Cookie cookie = new Cookie();
-                    out.write("cookie-text " + cookie.getCookie(cookieFilePath));
-                    out.newLine();
-                    out.flush();
-                
-                } else {
-                    out.write("Invalid request, please use \"get-cookie\" to request cookies");
-                    out.newLine();
-                    out.flush();
-                }
-                clientLine = in.readLine();
-    
-            } catch (Exception e) {
-                e.printStackTrace();
-                break;
-            }
-        } */
 
     }
-
 }
