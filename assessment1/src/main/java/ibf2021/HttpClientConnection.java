@@ -52,7 +52,7 @@ public class HttpClientConnection implements Runnable {
                 Scanner scan = new Scanner(clientLine);
                 String method = scan.next();
                 String Response1 = "HTTP/1.1 405 Method Not Allowed";
-                String Response2 = method + "not supported";
+                String Response2 = method + " not supported";
                 out.writeString(Response1);
                 out.writeString();
                 out.writeString(Response2);
@@ -71,7 +71,7 @@ public class HttpClientConnection implements Runnable {
                     Path resourcePath = Paths.get(dir + resource.trim());
                     if (!Files.exists(resourcePath)) {
                         String Response1 = "HTTP/1.1 404 Not Found";
-                        String Response2 = resource + "not found";
+                        String Response2 = resource + " not found";
                         out.writeString(Response1);
                         out.writeString();
                         out.writeString(Response2);
